@@ -11,6 +11,7 @@ public abstract class BaseItem {
     };
     public string Name { get; private set; }
     public BaseItem(String name) { Name = name; }
+    public virtual BaseItem Clone() { return (BaseItem)this.MemberwiseClone(); }
     public abstract Result Use(PlayerController player);
     public virtual Result Release(PlayerController player) { return Result.Ignored; }
 }

@@ -63,6 +63,7 @@ public class EnemyController : MonoBehaviour {
 
 	public void Die() {
 		player.AddExp(xp);
+        GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
 		Destroy(gameObject);
 	}
 }
