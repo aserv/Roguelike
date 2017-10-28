@@ -17,9 +17,17 @@ public abstract class BaseItem {
 
 public class HealthUpItem : BaseItem {
     public int HealthUp { get; private set; }
-    public HealthUpItem() : base("MedPack") { HealthUp = 1; }
+    public HealthUpItem(String name) : base(name) { HealthUp = 1; }
     public override Result Use(PlayerController player) {
         player.health += HealthUp;
+        return Result.Consumed;
+    }
+}
+public class BasicProjectileItem : BaseItem {
+    public GameObject Prefab { get; private set; }
+    public BasicProjectileItem(String name, GameObject prefab) : base(name) { Prefab = prefab; }
+    public override Result Use(PlayerController player) {
+        GameObject.Instantiate(Prefab, player.gameObject.transform.position, player.gameObject.transform.rotation);
         return Result.Consumed;
     }
 }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Pickup : MonoBehaviour {
-
+    public GameObject fireball;
     private void Start() {
-        item = new HealthUpItem();
+        //item = new HealthUpItem("MedPack");
+        item = new BasicProjectileItem("Fireball", fireball);
     }
 
     public BaseItem item;
