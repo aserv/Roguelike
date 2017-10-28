@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour {
 	public int damageOnHit;
 	public int xp;
 	public PlayerController player;
+	public int health;
 
 	private Rigidbody2D rb;
 
@@ -53,7 +54,15 @@ public class EnemyController : MonoBehaviour {
 		player.TakeDamage(dmg);
 	}
 
+	public void TakeDamage(int dmg) {
+		health -= dmg;
+		if (health <= 0) {
+			Die();
+		}
+	}
+
 	public void Die() {
 		player.AddExp(xp);
+		Destroy(gameObject);
 	}
 }

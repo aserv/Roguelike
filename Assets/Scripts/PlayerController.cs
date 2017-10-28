@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour {
 	public int health;
 	public int exp;
 	public int lvl;
+	public float punchDistance;
+	public int punchStrength;
 
 	[SerializeField]
 	private BaseItem[] items;
 	private int nextItem = 0;
 	private Rigidbody2D rb;
+
 	// Use this for initialization
 	void Start() {
 		items = new BaseItem[4];
@@ -32,6 +35,9 @@ public class PlayerController : MonoBehaviour {
 		if (items [3] != null && Input.GetButtonDown("Use4")) {
 			UseItem(3);
 		}
+		if (Input.GetButtonDown("Attack")) {
+			Attack();
+		}
 	}
 
 	// Update is called once per frame
@@ -43,8 +49,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void AddExp(int exp) {
-		exp += exp;
+	public void AddExp(int xp) {
+		exp += xp;
 	}
 
 	public bool PickupItem(BaseItem i) {
@@ -76,6 +82,14 @@ public class PlayerController : MonoBehaviour {
 
 	public void TakeDamage(int dmg) {
 		health -= dmg;
+	}
+
+	public void Attack() {
+		RaycastHit2D[] results = new RaycastHit2D[1];
+		int r = gameObject.GetComponent<Collider2D>().Cast(new Vector2(Mathf.Cos(rb.rotation), Mathf.Sin(rb.rotation)), results, punchDistance);
+		if (r > 0 && results [0].rigidbody.gameObject.CompareTag("Enemy")) {
+			results [0].rigidbody.gameObject.GetComponent<EnemyController>().TakeDamage(punchStrength);
+		}
 	}
 
 	private const float sqrt2over2 = 0.707106781186f;
