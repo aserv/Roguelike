@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Attack() {
 		RaycastHit2D[] results = new RaycastHit2D[1];
-		int r = gameObject.GetComponent<Collider2D>().Cast(new Vector2(Mathf.Cos(rb.rotation), Mathf.Sin(rb.rotation)), results, punchDistance);
+		int r = gameObject.GetComponent<Collider2D>().Cast(new Vector2(Mathf.Cos(Mathf.Deg2Rad * rb.rotation), Mathf.Sin(Mathf.Deg2Rad * rb.rotation)), results, punchDistance);
 		if (r > 0 && results [0].rigidbody != null && results [0].rigidbody.gameObject.CompareTag("Enemy")) {
 			results [0].rigidbody.gameObject.GetComponent<EnemyController>().TakeDamage(punchStrength);
 		}
