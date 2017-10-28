@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour {
 
 	public float speed;
-	public float damageOnHit;
+	public int damageOnHit;
 	public int xp;
 	public PlayerController player;
 
@@ -48,7 +49,7 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 
-	public void HurtPlayer(float dmg) {
+	public void HurtPlayer(int dmg) {
 		player.TakeDamage(dmg);
 	}
 
