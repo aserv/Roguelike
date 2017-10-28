@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 	public float moveSpeed;
 	public int health;
+    public int maxHealth;
 	public int exp;
+    public int nextexp;
 	public int lvl;
 	public float punchDistance;
 	public int punchStrength;
