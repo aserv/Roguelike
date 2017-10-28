@@ -50,7 +50,7 @@ public class AutoTileWall : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		spr = gameObject.GetComponent<SpriteRenderer>();
-		int[] surrounding = new int[4]{ 0, 0, 0, 0 };
+		Place[] surrounding = new Place[4]{ 0, 0, 0, 0 };
 		RaycastHit2D[] result = new RaycastHit2D [1];
 		Vector2 dir;
 		int r;
@@ -73,50 +73,50 @@ public class AutoTileWall : MonoBehaviour {
 				}
 			}
 		}
-		switch (surrounding [Direction.Right]) {
-		case 2: // wall to the right
-			if (surrounding [Direction.Down] == Place.Wall) { // wall below, to the right
-				if (surrounding [Direction.Left] == Place.Wall) { // 3 walls
-					if (surrounding [Direction.Up] == Place.Floor) { // and a floor
+		switch (surrounding [(int)Direction.Right]) {
+		case Place.Wall: // wall to the right
+			if (surrounding [(int)Direction.Down] == Place.Wall) { // wall below, to the right
+				if (surrounding [(int)Direction.Left] == Place.Wall) { // 3 walls
+					if (surrounding [(int)Direction.Up] == Place.Floor) { // and a floor
 						spr.sprite = wallD;
 					} else {										// 4 walls
 						spr.sprite = wallInner;
 					}
-				} else if (surrounding [Direction.Up] == Place.Wall) { // 3 walls
-					if (surrounding [Direction.Left] == Place.Floor) {
+				} else if (surrounding [(int)Direction.Up] == Place.Wall) { // 3 walls
+					if (surrounding [(int)Direction.Left] == Place.Floor) {
 						spr.sprite = wallL;
 					} else {
 						spr.sprite = wallInner;
 					}
 				} else { // exactly one wall below, one to the right
-					if (surrounding [Direction.Left] == Place.Floor || surrounding [Direction.Up] == Place.Floor) { // floor facing corner
+					if (surrounding [(int)Direction.Left] == Place.Floor || surrounding [(int)Direction.Up] == Place.Floor) { // floor facing corner
 						spr.sprite = wallOutCornerDL;
 					} else { // inner corner
 						spr.sprite = wallCornerDL;
 					}
 				}
-			} else if (surrounding [Direction.Left] == Place.Wall) { // wall to the left, to the right and not below
-				if (surrounding [Direction.Up] == Place.Wall) { // wall to the left, to the right, and above
-					if (surrounding [Direction.Down] == Place.Floor) { // floor below
+			} else if (surrounding [(int)Direction.Left] == Place.Wall) { // wall to the left, to the right and not below
+				if (surrounding [(int)Direction.Up] == Place.Wall) { // wall to the left, to the right, and above
+					if (surrounding [(int)Direction.Down] == Place.Floor) { // floor below
 						spr.sprite = wallD;
 					} else { // 'nothing' below
 						spr.sprite = wallInner;
 					}
 				} else { // wall to the left, to the right, and not below or above
-					if (surrounding [Direction.Up] == Place.Floor) {
-						if (surrounding [Direction.Down] == Place.Floor) {
+					if (surrounding [(int)Direction.Up] == Place.Floor) {
+						if (surrounding [(int)Direction.Down] == Place.Floor) {
 							spr.sprite = wallHorInner; // floors on both sides
 						} else {
 							spr.sprite = wallU; 
 						}
-					} else if (surrounding [Direction.Down] == Place.Floor) {
+					} else if (surrounding [(int)Direction.Down] == Place.Floor) {
 						spr.sprite = wallD;
 					} else {
 						spr.sprite = wallInner; // should never come up, but if someone screwed up it's here
 					}
 				}
-			} else if (surrounding [Direction.Up] == Place.Wall) { // wall above, to the right and not below or to the left
-				if (surrounding [Direction.Down] == Place.Floor || surrounding [Direction.Left] == Place.Floor) {
+			} else if (surrounding [(int)Direction.Up] == Place.Wall) { // wall above, to the right and not below or to the left
+				if (surrounding [(int)Direction.Down] == Place.Floor || surrounding [(int)Direction.Left] == Place.Floor) {
 					spr.sprite = wallOutCornerUL;
 				} else {
 					spr.sprite = wallCornerUL;
@@ -128,36 +128,36 @@ public class AutoTileWall : MonoBehaviour {
 
 
 		default: // empty to the right
-			switch (surrounding [Direction.Down]) {
-			case 2:
-				if (surrounding [Direction.Left] == Place.Wall) { // wall below and to the left
-					if (surrounding [Direction.Up] == Place.Wall) { // wall below, to the left, above
-						if (surrounding [Direction.Right] == Place.Floor) {
+			switch (surrounding [(int)Direction.Down]) {
+			case Place.Wall:
+				if (surrounding [(int)Direction.Left] == Place.Wall) { // wall below and to the left
+					if (surrounding [(int)Direction.Up] == Place.Wall) { // wall below, to the left, above
+						if (surrounding [(int)Direction.Right] == Place.Floor) {
 							spr.sprite = wallL;
 						} else {
 							spr.sprite = wallInner;
 						}
-					} else if (surrounding [Direction.Up] == Place.Floor) { // floor above
-						if (surrounding [Direction.Right] == Place.Floor) {
+					} else if (surrounding [(int)Direction.Up] == Place.Floor) { // floor above
+						if (surrounding [(int)Direction.Right] == Place.Floor) {
 							spr.sprite = wallOutCornerDR;
 						} else {
 							spr.sprite = wallU;
 						}
 					} else { // empty space above
-						if (surrounding [Direction.Right] == Place.Floor) { // fix this shit to work like the rest
+						if (surrounding [(int)Direction.Right] == Place.Floor) { // fix this shit to work like the rest
 							spr.sprite = wallL;
 						} else {
 							spr.sprite = wallCornerDR;
 						}
 					}
-				} else if (surrounding [Direction.Up] == Place.Wall) { // wall below and above and not to the left
-					if (surrounding [Direction.Left] == Place.Floor) {
-						if (surrounding [Direction.Right] == Place.Floor) {
+				} else if (surrounding [(int)Direction.Up] == Place.Wall) { // wall below and above and not to the left
+					if (surrounding [(int)Direction.Left] == Place.Floor) {
+						if (surrounding [(int)Direction.Right] == Place.Floor) {
 							spr.sprite = wallVertInner; // floors on both sides
 						} else {
 							spr.sprite = wallR; 
 						}
-					} else if (surrounding [Direction.Right] == Place.Floor) {
+					} else if (surrounding [(int)Direction.Right] == Place.Floor) {
 						spr.sprite = wallL;
 					} else {
 						spr.sprite = wallInner; // should never come up, but if someone screwed up it's here
@@ -167,23 +167,23 @@ public class AutoTileWall : MonoBehaviour {
 				}
 				break;
 			default: // empty to the right and below
-				switch (surrounding [Direction.Left]) {
-				case 2:
-					if (surrounding [Direction.Up] == Place.Wall) {
-						if (surrounding [Direction.Right] == Place.Floor || surrounding [Direction.Down] == Place.Floor) {
+				switch (surrounding [(int)Direction.Left]) {
+				case Place.Wall:
+					if (surrounding [(int)Direction.Up] == Place.Wall) {
+						if (surrounding [(int)Direction.Right] == Place.Floor || surrounding [(int)Direction.Down] == Place.Floor) {
 							spr.sprite = wallOutCornerUR;
 						} else {
 							spr.sprite = wallCornerUR;
 						}
-					} else if (surrounding [Direction.Up] == Place.Floor) {
-						if (surrounding [Direction.Right] == Place.Floor) {
-							if (surrounding [Direction.Down] == Place.Floor) {
+					} else if (surrounding [(int)Direction.Up] == Place.Floor) {
+						if (surrounding [(int)Direction.Right] == Place.Floor) {
+							if (surrounding [(int)Direction.Down] == Place.Floor) {
 								spr.sprite = wallHorOuterL;
 							} else {
 								spr.sprite = wallOutCornerDR;
 							}
 						} else {
-							if (surrounding [Direction.Down] == Place.Floor) {
+							if (surrounding [(int)Direction.Down] == Place.Floor) {
 								spr.sprite = wallInner;
 							} else {
 								spr.sprite = wallU;
@@ -194,15 +194,15 @@ public class AutoTileWall : MonoBehaviour {
 					}
 					break;
 				default: // empty to the right, left, and below
-					switch (surrounding [Direction.Up]) {
-					case 2:
+					switch (surrounding [(int)Direction.Up]) {
+					case Place.Wall:
 						spr.sprite = wallVertOuterD;
 						break;
 					default: // no walls on any sides
-						if (surrounding [Direction.Right] == Place.Floor ||
-						    surrounding [Direction.Down] == Place.Floor ||
-						    surrounding [Direction.Left] == Place.Floor ||
-						    surrounding [Direction.Up] == Place.Floor) {
+						if (surrounding [(int)Direction.Right] == Place.Floor ||
+						    surrounding [(int)Direction.Down] == Place.Floor ||
+						    surrounding [(int)Direction.Left] == Place.Floor ||
+						    surrounding [(int)Direction.Up] == Place.Floor) {
 							spr.sprite = wallLone;
 						} else {
 							spr.sprite = wallInner;
