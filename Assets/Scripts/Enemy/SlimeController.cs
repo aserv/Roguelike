@@ -5,7 +5,9 @@ using UnityEngine;
 public class SlimeController : EnemyController {
 	// Update is called once per frame
 	void FixedUpdate() {
-		MoveRadian(pickAngle());
+		if (player != null) {
+			MoveRadian(pickAngle());
+		}
 	}
 
 	private float pickAngle() {
