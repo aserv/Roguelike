@@ -120,7 +120,6 @@ MonoBehaviour:
   speed: 2
   damageOnHit: 1
   xp: 1
-  player: {fileID: 0}
   health: 2
 --- !u!212 &212486671916950658
 SpriteRenderer:

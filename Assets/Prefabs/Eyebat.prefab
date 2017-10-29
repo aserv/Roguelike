@@ -121,6 +121,8 @@ MonoBehaviour:
   damageOnHit: 2
   xp: 2
   health: 2
+  wiggleFrequency: 0.1
+  wiggleAmplitude: 1
 --- !u!212 &212486671916950658
 SpriteRenderer:
   m_ObjectHideFlags: 1
