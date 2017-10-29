@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float punchDistance;
 	public int punchStrength;
 
-	[SerializeField]
+    [SerializeField]
 	private BaseItem[] items;
 	private int nextItem = 0;
 	private Rigidbody2D rb;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 		return true;
 	}
 
-	public BaseItem getItemAt(int i) {
+	public BaseItem GetItemAt(int i) {
 		return items [i];
 	}
 
