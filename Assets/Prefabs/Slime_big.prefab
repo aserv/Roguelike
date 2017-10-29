@@ -121,6 +121,7 @@ MonoBehaviour:
   damageOnHit: 2
   xp: 2
   health: 10
+  findDistance: 5
 --- !u!212 &212462153619613804
 SpriteRenderer:
   m_ObjectHideFlags: 1

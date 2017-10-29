@@ -4,19 +4,35 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour {
-
 	public float speed;
 	public int damageOnHit;
 	public int xp;
 	public int health;
+    public float findDistance;
 
-	private Rigidbody2D rb;
+    private Rigidbody2D rb;
+	private Animator animator;
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
+		animator = this.GetComponent<Animator>();
 	}
 
 	// act as callbacks in the 'ai' of the more specific enemies
+
+	public Animator GetAnimator() {
+		return animator;
+	}
+
+    public void MoveStop()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
+    public void SlowDown(float a)
+    {
+        rb.velocity = new Vector2(rb.velocity.x * a, rb.velocity.y * a);
+    }
 
 	public void MoveUp() { 
 		MoveDegree(90.0f);
@@ -49,6 +65,17 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 
+    public float pickAngle()
+    {
+        Vector2 dir = GameController.Instance.player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
+        dir.Normalize();
+        return Mathf.Atan2(dir.y, dir.x);
+    }
+
+    public bool CloseToPlayer(float dist) {
+		return Vector2.Distance(gameObject.transform.position, GameController.Instance.player.gameObject.transform.position) < dist;
+	}
+
 	public void HurtPlayer(int dmg) {
         GameController.Instance.player.TakeDamage(dmg);
 	}
@@ -62,7 +89,7 @@ public class EnemyController : MonoBehaviour {
 
 	public void Die() {
         GameController.Instance.player.AddExp(xp);
-        GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
+		GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
 		Destroy(gameObject);
 	}
 }
