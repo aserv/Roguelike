@@ -383,6 +383,11 @@ Prefab:
       propertyPath: itemIcon.Array.data[3]
       value: 
       objectReference: {fileID: 555589688}
+    - target: {fileID: 114770569337104054, guid: 1dd8c1a8c5e9840c0b9cbe03cc90f4e1,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1dd8c1a8c5e9840c0b9cbe03cc90f4e1, type: 2}
   m_IsPrefabParent: 0
