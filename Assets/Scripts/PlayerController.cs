@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour {
 	private int nextItem = 0;
 	private Rigidbody2D rb;
     private Vector2 facing;
+	private Animator animator;
 
 	// Use this for initialization
 	void Start() {
 		items = new BaseItem[4];
 		rb = this.GetComponent<Rigidbody2D>();
+		animator = this.GetComponent<Animator>();
 	}
 
 	void Update() {
@@ -49,8 +51,8 @@ public class PlayerController : MonoBehaviour {
 		rb.velocity = input * moveSpeed;
 		if (input != Vector2.zero) {
             facing = input;
-            GetComponent<Animator>().SetFloat("X", facing.x);
-            GetComponent<Animator>().SetFloat("Y", facing.y);
+            animator.SetFloat("X", facing.x);
+			animator.SetFloat("Y", facing.y);
 		}
 	}
 
