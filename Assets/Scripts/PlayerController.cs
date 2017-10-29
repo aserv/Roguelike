@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void UseItem(int i) {
+        animator.SetTrigger("UseItem");
 		if (items [i] == null)
 			return;
 		BaseItem.Result res = items [i].Use(this);
@@ -96,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Attack() {
+        animator.SetTrigger("Attack");
 		RaycastHit2D[] results = new RaycastHit2D[1];
 		int r = gameObject.GetComponent<Collider2D>().Cast(facing, results, punchDistance);
 		if (r > 0 && results [0].rigidbody != null && results [0].rigidbody.gameObject.CompareTag("Enemy")) {
