@@ -63,7 +63,8 @@ namespace Items {
         public override Result Use(PlayerController player) {
             player.StartCoroutine(
                 pattern.Begin((d, r) => {
-                    Quaternion rot = r ? player.gameObject.transform.rotation : Quaternion.identity;
+                    Vector2 v = player.Facing();
+                    Quaternion rot = r ? Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(v.y, v.x)) : Quaternion.identity;
                     rot *= d;
                     GameObject.Instantiate(Prefab, player.gameObject.transform.position, rot);
                 })
