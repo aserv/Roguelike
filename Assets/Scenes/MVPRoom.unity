@@ -835,6 +835,10 @@ Prefab:
       propertyPath: raiseOnKill
       value: 
       objectReference: {fileID: 1006211184}
+    - target: {fileID: 1451975580555356, guid: 3095b011711cc4033b1a803cdfc1b2f0, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3095b011711cc4033b1a803cdfc1b2f0, type: 2}
   m_IsPrefabParent: 0
