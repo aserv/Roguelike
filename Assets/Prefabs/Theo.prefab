@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50192556048284436}
   - component: {fileID: 61881653705727686}
   - component: {fileID: 95282717191018984}
-  - component: {fileID: 114026689356115914}
+  - component: {fileID: 114535024112398048}
   m_Layer: 0
   m_Name: Theo
   m_TagString: Enemy
@@ -80,7 +80,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.5}
+    oldSize: {x: 0.375, y: 0.75}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1006206292096152}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d57c1f81d33a91449915b2a6dcea9f30, type: 2}
+  m_Controller: {fileID: 9100000, guid: cce0e212d3cc91c45805112b39d8162c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,7 +106,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114026689356115914
+--- !u!114 &114535024112398048
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,16 +114,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1006206292096152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3421c3a5ce4ae4142bee643aa984dd02, type: 3}
+  m_Script: {fileID: 11500000, guid: cf9ba730997f861419d9b4dd836f9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  damageOnHit: 2
+  speed: 2
+  damageOnHit: 10
   xp: 5
   health: 5
-  findDistance: 100
-  runTimer: 30
-  cooldownTimer: 60
+  findDistance: 5
+  wiggleFrequency: 0
+  wiggleAmplitude: 0
 --- !u!212 &212960479410560956
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f10d9ed5ce373174fb6d8b959c753b6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f7aae4de8f7bd14593e9d8ffcd8c7c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
