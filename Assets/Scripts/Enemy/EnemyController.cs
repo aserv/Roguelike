@@ -4,14 +4,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour {
-
 	public float speed;
 	public int damageOnHit;
 	public int xp;
 	protected PlayerController player;
 	public int health;
+    public float findDistance;
 
-	private Rigidbody2D rb;
+    private Rigidbody2D rb;
 	private Animator animator;
 
 	void Start() {
