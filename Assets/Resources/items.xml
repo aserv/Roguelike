@@ -10,6 +10,16 @@
       <relative time="0.3">0</relative>
       <relative time="0.45">0</relative>
     </pattern>
+    <pattern name="OmniShot">
+      <absolute time="0">0</absolute>
+      <absolute time="0">45</absolute>
+      <absolute time="0">90</absolute>
+      <absolute time="0">135</absolute>
+      <absolute time="0">180</absolute>
+      <absolute time="0">-135</absolute>
+      <absolute time="0">-90</absolute>
+      <absolute time="0">-45</absolute>
+    </pattern>
   </patterns>
   <items>
     <item name="Items.BasicProjectileItem">
@@ -24,9 +34,16 @@
       <prefab>prefabs/Fireball</prefab>
       <pattern>SingleShot</pattern>
     </item>
+    <item name="Items.BasicProjectileItem">
+      <name>Icicle</name>
+      <icon>icons/icicle</icon>
+      <prefab>prefabs/Icicle</prefab>
+      <pattern>OmniShot</pattern>
+    </item>
   </items>
   <droptable tiers="1">
     <drop item="Fireball" tier="0" rate="5"/>
     <drop item="LightningBolt" tier="0" rate="5"/>
+    <drop item="Icicle" tier="0" rate="5000"/>
   </droptable>
 </root>
