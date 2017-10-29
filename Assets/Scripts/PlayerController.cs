@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	private BaseItem[] items;
 	private int nextItem = 0;
 	private Rigidbody2D rb;
+    private Vector2 facing;
 
 	// Use this for initialization
 	void Start() {
@@ -44,14 +45,18 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate() {
-		Vector2 facing = Snap(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
-		rb.velocity = facing * moveSpeed;
-		if (facing != Vector2.zero) {
+		Vector2 input= Snap(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+		rb.velocity = input * moveSpeed;
+		if (input != Vector2.zero) {
+            facing = input;
             GetComponent<Animator>().SetFloat("X", facing.x);
             GetComponent<Animator>().SetFloat("Y", facing.y);
-			//rb.rotation = Mathf.Rad2Deg * Mathf.Atan2(facing.y, facing.x);
 		}
 	}
+
+    public Vector2 Facing() {
+        return facing;
+    }
 
 	public void AddExp(int xp) {
 		exp += xp;
@@ -90,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Attack() {
 		RaycastHit2D[] results = new RaycastHit2D[1];
-		int r = gameObject.GetComponent<Collider2D>().Cast(new Vector2(Mathf.Cos(Mathf.Deg2Rad * rb.rotation), Mathf.Sin(Mathf.Deg2Rad * rb.rotation)), results, punchDistance);
+		int r = gameObject.GetComponent<Collider2D>().Cast(facing, results, punchDistance);
 		if (r > 0 && results [0].rigidbody != null && results [0].rigidbody.gameObject.CompareTag("Enemy")) {
 			results [0].rigidbody.gameObject.GetComponent<EnemyController>().TakeDamage(punchStrength);
 		}

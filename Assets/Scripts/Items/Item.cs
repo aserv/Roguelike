@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public abstract class BaseItem {
     public enum Result {
@@ -17,6 +18,32 @@ public abstract class BaseItem {
     public virtual Result Release(PlayerController player) { return Result.Ignored; }
 }
 
+public class Pattern {
+    public struct FireAction {
+        public float Time;
+        public Quaternion Direction;
+        public bool Relative;
+    }
+    public Pattern(IEnumerable<FireAction> a) {
+        this.actions = a.OrderBy(x => x.Time).ToArray();
+    }
+    private FireAction[] actions;
+    public IEnumerator Begin(Action<Quaternion, bool> action) {
+        int i = 0;
+        float time = Time.time;
+        while (i < actions.Length) {
+            FireAction a = actions[i];
+            if (actions[i].Time + time > Time.time) {
+                yield return new WaitForSeconds(actions[i].Time + time - Time.time);
+            } else {
+                action(a.Direction, a.Relative);
+                i++;
+            }
+        }
+        yield break;
+    }
+}
+
 namespace Items {
     public class HealthUpItem : BaseItem {
         public int HealthUp { get; private set; }
@@ -28,9 +55,20 @@ namespace Items {
     }
     public class BasicProjectileItem : BaseItem {
         public GameObject Prefab { get; private set; }
-        public BasicProjectileItem(String name, Sprite icon, GameObject prefab) : base(name, icon) { Prefab = prefab; }
+        private Pattern pattern;
+        public BasicProjectileItem(String name, Sprite icon, GameObject prefab, Pattern pattern) : base(name, icon) {
+            Prefab = prefab;
+            this.pattern = pattern;
+        }
         public override Result Use(PlayerController player) {
-            GameObject.Instantiate(Prefab, player.gameObject.transform.position, player.gameObject.transform.rotation);
+            player.StartCoroutine(
+                pattern.Begin((d, r) => {
+                    Vector2 v = player.Facing();
+                    Quaternion rot = r ? Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(v.y, v.x)) : Quaternion.identity;
+                    rot *= d;
+                    GameObject.Instantiate(Prefab, player.gameObject.transform.position, rot);
+                })
+            );
             return Result.Consumed;
         }
     }
