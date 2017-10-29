@@ -8,13 +8,14 @@ public class EnemyController : MonoBehaviour {
 	public float speed;
 	public int damageOnHit;
 	public int xp;
-	public PlayerController player;
+	protected PlayerController player;
 	public int health;
 
 	private Rigidbody2D rb;
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
 	}
 
 	// act as callbacks in the 'ai' of the more specific enemies

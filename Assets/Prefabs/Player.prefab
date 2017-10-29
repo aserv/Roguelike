@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61712435632752342
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -101,7 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   health: 5
+  maxHealth: 5
   exp: 0
+  nextexp: 100
   lvl: 1
   punchDistance: 0.5
   punchStrength: 2
