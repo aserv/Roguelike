@@ -7,6 +7,8 @@ TagManager:
   - Pickup
   - Enemy
   - Projectile
+  - Floor
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - EnemyProjectile
   - Enemy
   - Player
-  - 
+  - Gate
   - 
   - 
   - 
