@@ -8,14 +8,12 @@ public class EnemyController : MonoBehaviour {
 	public float speed;
 	public int damageOnHit;
 	public int xp;
-	protected PlayerController player;
 	public int health;
 
 	private Rigidbody2D rb;
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
 	}
 
 	// act as callbacks in the 'ai' of the more specific enemies
@@ -52,7 +50,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void HurtPlayer(int dmg) {
-		player.TakeDamage(dmg);
+        GameController.Instance.player.TakeDamage(dmg);
 	}
 
 	public void TakeDamage(int dmg) {
@@ -63,7 +61,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void Die() {
-		player.AddExp(xp);
+        GameController.Instance.player.AddExp(xp);
         GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
 		Destroy(gameObject);
 	}
