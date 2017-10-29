@@ -81,24 +81,27 @@ public class ItemTable {
         }
         return false;
     }
-    private static BaseItem LoadItem(XmlReader reader) {
+    private static BaseItem LoadItem(XmlReader reader, Dictionary<string, Pattern> patterns) {
         reader.MoveToContent();
         ArrayList args = new ArrayList();
         string typeName = reader.GetAttribute("name");
         
         try {
             while (reader.Read()) {
-                if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "type") break;
+                if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "item") break;
                 if (reader.NodeType == XmlNodeType.Element) {
                     string n = reader.Name;
                     if (n == "name") {
                         args.Add(reader.ReadElementContentAsString());
                     } else if (n == "icon") {
-                        args.Add(Resources.Load(reader.ReadElementContentAsString(), typeof(Sprite)) as Sprite);
+                        Object[] res = Resources.LoadAll(reader.ReadElementContentAsString(), typeof(Sprite));
+                        args.Add(res.Length == 0 ? null : res[0]);
                     } else if (n == "prefab") {
                         args.Add(Resources.Load(reader.ReadElementContentAsString(), typeof(GameObject)) as GameObject);
+                    } else if (n == "pattern") {
+                        args.Add(patterns[reader.ReadElementContentAsString()]);
                     } else {
-                        Debug.LogFormat("Ignoring type argument {0}", reader.Name);
+                        Debug.LogFormat("Ignoring item argument {0}", reader.Name);
                     }
                 }
             }
@@ -111,20 +114,58 @@ public class ItemTable {
             return null;
         }
     }
+    private static Pattern LoadPattern(XmlReader reader) {
+        List<Pattern.FireAction> actions = new List<Pattern.FireAction>();
+        while (reader.Read()) {
+            if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "pattern") break;
+            if (reader.NodeType == XmlNodeType.Element) {
+                Pattern.FireAction act = new Pattern.FireAction();
+                float angle;
+                if (reader.Name == "absolute") {
+                    act.Relative = false;
+                } else if (reader.Name == "relative") {
+                    act.Relative = true;
+                } else {
+                    continue;
+                }
+                if (float.TryParse(reader.GetAttribute("time"), out act.Time) && float.TryParse(reader.ReadElementContentAsString(), out angle)) {
+                    act.Direction = Quaternion.Euler(0, 0, angle);
+                }
+                actions.Add(act);
+            }
+        }
+        return new Pattern(actions);
+    }
 
     public static ItemTable Load(string resource) {
         ItemTable table = new ItemTable();
         table.itemlist = new Dictionary<string, BaseItem>();
         XmlReader reader = XmlReader.Create(new FileStream(resource, FileMode.Open));
+        Dictionary<string, Pattern> patterns = new Dictionary<string, Pattern>();
         reader.MoveToContent();
-        if (!reader.ReadToDescendant("items")) {
+
+        if (!reader.ReadToDescendant("patterns")) {
+            Debug.Log("XML Has no patterns");
+            return null;
+        }
+
+        if (reader.ReadToDescendant("pattern")) {
+            do {
+                string name = reader.GetAttribute("name");
+                Pattern p = LoadPattern(reader.ReadSubtree());
+                if (p != null) patterns.Add(name, p);
+            } while (reader.ReadToNextSibling("pattern"));
+        }
+
+
+        if (!reader.ReadToNextSibling("items")) {
             Debug.Log("XML Has no items");
             return null;
         }
 
         if (reader.ReadToDescendant("item")) {
             do {
-                BaseItem it = LoadItem(reader.ReadSubtree());
+                BaseItem it = LoadItem(reader.ReadSubtree(), patterns);
                 if (it != null) {
                     table.itemlist.Add(it.Name, it);
                 } else {

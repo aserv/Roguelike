@@ -1,14 +1,28 @@
 <root>
+  <patterns>
+    <pattern name="SingleShot">
+      <relative time="0">0</relative>
+      <!--<absolute time="0">0</absolute>-->
+    </pattern>
+    <pattern name="QuadShot">
+      <relative time="0">0</relative>
+      <relative time="0.15">0</relative>
+      <relative time="0.3">0</relative>
+      <relative time="0.45">0</relative>
+    </pattern>
+  </patterns>
   <items>
     <item name="Items.BasicProjectileItem">
       <name>LightningBolt</name>
-      <icon>icons/lightning_0</icon>
+      <icon>icons/lightning</icon>
       <prefab>prefabs/LightningBolt</prefab>
+      <pattern>QuadShot</pattern>
     </item>
     <item name="Items.BasicProjectileItem">
       <name>Fireball</name>
-      <icon>icons/fireball_0</icon>
+      <icon>icons/fireball</icon>
       <prefab>prefabs/Fireball</prefab>
+      <pattern>SingleShot</pattern>
     </item>
   </items>
   <droptable tiers="1">

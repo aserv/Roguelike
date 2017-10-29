@@ -465,10 +465,10 @@ MonoBehaviour:
   healthBar: {fileID: 114433422437116822}
   expBar: {fileID: 114282953983753058}
   itemIcon:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 114770569337104054}
+  - {fileID: 114142294878911202}
+  - {fileID: 114507989198794990}
+  - {fileID: 114042104119991234}
 --- !u!114 &114151759406144948
 MonoBehaviour:
   m_ObjectHideFlags: 1
