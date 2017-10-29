@@ -123,6 +123,7 @@ MonoBehaviour:
   health: 2
   wiggleFrequency: 0.1
   wiggleAmplitude: 1
+  findDistance: 6
 --- !u!212 &212486671916950658
 SpriteRenderer:
   m_ObjectHideFlags: 1

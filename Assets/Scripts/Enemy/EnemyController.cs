@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+		player = GameObject.Find("Player").GetComponent<PlayerController>();
 		animator = this.GetComponent<Animator>();
 	}
 
@@ -57,6 +57,10 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 
+	public bool CloseToPlayer(float dist) {
+		return Vector2.Distance(gameObject.transform.position, player.gameObject.transform.position) < dist;
+	}
+
 	public void HurtPlayer(int dmg) {
 		player.TakeDamage(dmg);
 	}
@@ -70,7 +74,7 @@ public class EnemyController : MonoBehaviour {
 
 	public void Die() {
 		player.AddExp(xp);
-        GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
+		GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
 		Destroy(gameObject);
 	}
 }
