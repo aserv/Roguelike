@@ -26,6 +26,16 @@ public class EnemyController : MonoBehaviour {
 		return animator;
 	}
 
+    public void MoveStop()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
+    public void SlowDown(float a)
+    {
+        rb.velocity = new Vector2(rb.velocity.x * a, rb.velocity.y * a);
+    }
+
 	public void MoveUp() { 
 		MoveDegree(90.0f);
 	}
@@ -57,7 +67,14 @@ public class EnemyController : MonoBehaviour {
 		}
 	}
 
-	public bool CloseToPlayer(float dist) {
+    public float pickAngle()
+    {
+        Vector2 dir = player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
+        dir.Normalize();
+        return Mathf.Atan2(dir.y, dir.x);
+    }
+
+    public bool CloseToPlayer(float dist) {
 		return Vector2.Distance(gameObject.transform.position, player.gameObject.transform.position) < dist;
 	}
 
