@@ -17,7 +17,12 @@ public class UIManager : MonoBehaviour {
         expBar.SetValue(player.exp / player.nextexp);
         for (int i = 0; i < 4; i++) {
             BaseItem it = player.GetItemAt(i);
-            itemIcon[i].sprite = it == null ? null : it.Icon;
+            if (it == null || it.Icon == null) {
+                itemIcon[i].enabled = false;
+            } else {
+                itemIcon[i].enabled = true;
+                itemIcon[i].sprite = it.Icon;
+            }
         }
     }
 }
