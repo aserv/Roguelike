@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Skeleton
+  m_Name: Tiki
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: X
@@ -41,7 +41,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 74922329b1faeb745a11e70b09f3a009, type: 2}
+    m_Motion: {fileID: 7400000, guid: f9de44e48b54a87428008f85f9ec8f37, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -49,7 +49,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: c91add612a125f04cb68082be5c9bab6, type: 2}
+    m_Motion: {fileID: 7400000, guid: 3febc01ab0cceee4daa80818f128773b, type: 2}
     m_Threshold: 0.33333334
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
@@ -57,7 +57,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a5844b08463c39342b3de029094f0c4e, type: 2}
+    m_Motion: {fileID: 7400000, guid: 3cec3d7bed3d67841a319e6bfbcddce5, type: 2}
     m_Threshold: 0.6666667
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -65,7 +65,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: bdea500420890b9449554c9654180914, type: 2}
+    m_Motion: {fileID: 7400000, guid: d948f01ee27a18f498c6d3442edfd246, type: 2}
     m_Threshold: 1
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
