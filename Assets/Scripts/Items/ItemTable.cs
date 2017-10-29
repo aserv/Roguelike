@@ -34,7 +34,6 @@ public class ItemTable {
             if (val == -1) {
                 val = Random.Range(0, total);
             }
-            Debug.Log(val);
             int s = 0, e = count;
             while (s < e) {
                 int mid = (s + e) / 2;

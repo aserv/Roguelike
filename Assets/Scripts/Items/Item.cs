@@ -49,7 +49,7 @@ namespace Items {
         public int HealthUp { get; private set; }
         public HealthUpItem(String name, Sprite icon) : base(name, icon) { HealthUp = 1; }
         public override Result Use(PlayerController player) {
-            player.health += HealthUp;
+            player.data.health += HealthUp;
             return Result.Consumed;
         }
     }

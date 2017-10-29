@@ -1,43 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour {
-	public float moveSpeed;
-	public int health;
-    public int maxHealth;
-	public int exp;
-    public int nextexp;
-	public int lvl;
-	public float punchDistance;
-	public int punchStrength;
+    [Serializable]
+    public class PlayerData {
+        public float moveSpeed;
+        public int health;
+        public int maxHealth;
+        public int exp;
+        public int nextexp;
+        public int lvl;
+        public BaseItem[] items = new BaseItem[4];
+    }
+    public PlayerData data = new PlayerController.PlayerData();
+    public float punchDistance;
+    public int punchStrength;
 
-    [SerializeField]
-	private BaseItem[] items;
-	private int nextItem = 0;
+    private int nextItem = 0;
 	private Rigidbody2D rb;
     private Vector2 facing;
 	private Animator animator;
 
 	// Use this for initialization
 	void Start() {
-		items = new BaseItem[4];
 		rb = this.GetComponent<Rigidbody2D>();
 		animator = this.GetComponent<Animator>();
 	}
 
 	void Update() {
-		if (items [0] != null && Input.GetButtonDown("Use1")) {
+		if (data.items [0] != null && Input.GetButtonDown("Use1")) {
 			UseItem(0);
 		}
-		if (items [1] != null && Input.GetButtonDown("Use2")) {
+		if (data.items [1] != null && Input.GetButtonDown("Use2")) {
 			UseItem(1);
 		}
-		if (items [2] != null && Input.GetButtonDown("Use3")) {
+		if (data.items [2] != null && Input.GetButtonDown("Use3")) {
 			UseItem(2);
 		}
-		if (items [3] != null && Input.GetButtonDown("Use4")) {
+		if (data.items [3] != null && Input.GetButtonDown("Use4")) {
 			UseItem(3);
 		}
 		if (Input.GetButtonDown("Attack")) {
@@ -48,7 +51,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate() {
 		Vector2 input= Snap(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
-		rb.velocity = input * moveSpeed;
+		rb.velocity = input * data.moveSpeed;
 		if (input != Vector2.zero) {
             facing = input;
             animator.SetFloat("X", facing.x);
@@ -61,41 +64,43 @@ public class PlayerController : MonoBehaviour {
     }
 
 	public void AddExp(int xp) {
-		exp += xp;
+		data.exp += xp;
 	}
 
 	public bool PickupItem(BaseItem i) {
 		if (nextItem == -1)
 			return false;
-		items [nextItem] = i;
-		Debug.Log(i.Name);
+		data.items [nextItem] = i;
 		for (int n = 3; n >= 0; n--) {
-			if (items [n] == null)
+			if (data.items [n] == null)
 				nextItem = n;
 		}
 		return true;
 	}
 
 	public BaseItem GetItemAt(int i) {
-		return items [i];
+		return data.items [i];
 	}
 
 	private void UseItem(int i) {
-		if (items [i] == null)
-			return;
-		BaseItem.Result res = items [i].Use(this);
+		if (data.items [i] == null) return;
+        animator.SetTrigger("UseItem");
+        BaseItem.Result res = data.items [i].Use(this);
 		if (res == BaseItem.Result.Consumed) {
 			if (nextItem == -1 || nextItem > i)
 				nextItem = i;
-			items [i] = null;
+			data.items [i] = null;
 		}
 	}
 
 	public void TakeDamage(int dmg) {
-		health -= dmg;
+		data.health -= dmg;
+        if (data.health <= 0)
+            GameController.Instance.KillPlayer();
 	}
 
 	public void Attack() {
+        animator.SetTrigger("Attack");
 		RaycastHit2D[] results = new RaycastHit2D[1];
 		int r = gameObject.GetComponent<Collider2D>().Cast(facing, results, punchDistance);
 		if (r > 0 && results [0].rigidbody != null && results [0].rigidbody.gameObject.CompareTag("Enemy")) {

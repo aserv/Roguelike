@@ -7,7 +7,6 @@ public class EnemyController : MonoBehaviour {
 	public float speed;
 	public int damageOnHit;
 	public int xp;
-	protected PlayerController player;
 	public int health;
     public float findDistance;
 
@@ -16,7 +15,6 @@ public class EnemyController : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
-		player = GameObject.Find("Player").GetComponent<PlayerController>();
 		animator = this.GetComponent<Animator>();
 	}
 
@@ -69,17 +67,17 @@ public class EnemyController : MonoBehaviour {
 
     public float pickAngle()
     {
-        Vector2 dir = player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
+        Vector2 dir = GameController.Instance.player.GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().position;
         dir.Normalize();
         return Mathf.Atan2(dir.y, dir.x);
     }
 
     public bool CloseToPlayer(float dist) {
-		return Vector2.Distance(gameObject.transform.position, player.gameObject.transform.position) < dist;
+		return Vector2.Distance(gameObject.transform.position, GameController.Instance.player.gameObject.transform.position) < dist;
 	}
 
 	public void HurtPlayer(int dmg) {
-		player.TakeDamage(dmg);
+        GameController.Instance.player.TakeDamage(dmg);
 	}
 
 	public void TakeDamage(int dmg) {
@@ -90,7 +88,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void Die() {
-		player.AddExp(xp);
+        GameController.Instance.player.AddExp(xp);
 		GameObject.Find("DropManager").GetComponent<DropManager>().Drop(transform.position);
 		Destroy(gameObject);
 	}

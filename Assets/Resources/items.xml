@@ -44,6 +44,6 @@
   <droptable tiers="1">
     <drop item="Fireball" tier="0" rate="5"/>
     <drop item="LightningBolt" tier="0" rate="5"/>
-    <drop item="Icicle" tier="0" rate="5000"/>
+    <drop item="Icicle" tier="0" rate="5"/>
   </droptable>
 </root>

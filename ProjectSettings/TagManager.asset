@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Floor
   - Wall
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
