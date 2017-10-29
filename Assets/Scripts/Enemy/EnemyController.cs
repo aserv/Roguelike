@@ -12,13 +12,19 @@ public class EnemyController : MonoBehaviour {
 	public int health;
 
 	private Rigidbody2D rb;
+	private Animator animator;
 
 	void Start() {
 		rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+		animator = this.GetComponent<Animator>();
 	}
 
 	// act as callbacks in the 'ai' of the more specific enemies
+
+	public Animator GetAnimator() {
+		return animator;
+	}
 
 	public void MoveUp() { 
 		MoveDegree(90.0f);

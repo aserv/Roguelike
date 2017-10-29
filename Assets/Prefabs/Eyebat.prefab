@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4178122226383104}
   - component: {fileID: 212486671916950658}
-  - component: {fileID: 114325970302649006}
   - component: {fileID: 50231543447336206}
   - component: {fileID: 61529564500762098}
   - component: {fileID: 95375487511277514}
+  - component: {fileID: 114094390788977752}
   m_Layer: 0
-  m_Name: Slime
+  m_Name: Eyebat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018135956476418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.37, y: -1.69, z: 0}
+  m_LocalPosition: {x: -5.8390718, y: -2.447302, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 0.6666667}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1018135956476418}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 141c6c884376a460ab8b1945890f9651, type: 2}
+  m_Controller: {fileID: 9100000, guid: ec8574f215acca845b88e4ff982b39f5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,7 +106,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114325970302649006
+--- !u!114 &114094390788977752
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,13 +114,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1018135956476418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5bac42e4dacf44849aa7b19323dcd3b, type: 3}
+  m_Script: {fileID: 11500000, guid: cf9ba730997f861419d9b4dd836f9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  damageOnHit: 1
-  xp: 1
-  player: {fileID: 0}
+  damageOnHit: 2
+  xp: 2
   health: 2
 --- !u!212 &212486671916950658
 SpriteRenderer:
@@ -156,7 +155,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 78fe6e92b11924a9888399d6465f5e26, type: 3}
+  m_Sprite: {fileID: 21300008, guid: 70847deeebac9724495717f958b0a596, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
