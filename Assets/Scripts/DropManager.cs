@@ -6,11 +6,16 @@ using System.Linq;
 public class DropManager : MonoBehaviour {
     public GameObject pickup;
     public GameObject[] prefabs;
-    private ItemTable table = new ItemTable(1);
+    private ItemTable table = null;
 
     void Start() {
-        table.AddItem(new HealthUpItem("Mutton", null), 0, 10);
-        table.AddItem(new BasicProjectileItem("Fireball", null, prefabs.First(x => x.name == "Fireball")), 0, 5);
+        try {
+            table = ItemTable.Load("Assets/resources/items.xml");
+        } catch (System.Exception e) {
+            Debug.Log(e);
+        }
+        //table.AddItem(new HealthUpItem("Mutton", null), 0, 10);
+        //table.AddItem(new BasicProjectileItem("Fireball", null, prefabs.First(x => x.name == "Fireball")), 0, 5);
     }
 
     public void Drop(Vector2 location) {

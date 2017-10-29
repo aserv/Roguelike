@@ -1,0 +1,12 @@
+<root>
+  <items>
+    <item name="Items.BasicProjectileItem">
+      <name>Fireball</name>
+      <icon>icons/Fireball</icon>
+      <prefab>prefabs/Fireball</prefab>
+    </item>
+  </items>
+  <droptable tiers="1">
+    <drop item="Fireball" tier="0" rate="5"/>
+  </droptable>
+</root>
