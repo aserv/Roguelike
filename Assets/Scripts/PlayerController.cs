@@ -47,7 +47,9 @@ public class PlayerController : MonoBehaviour {
 		Vector2 facing = Snap(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
 		rb.velocity = facing * moveSpeed;
 		if (facing != Vector2.zero) {
-			rb.rotation = Mathf.Rad2Deg * Mathf.Atan2(facing.y, facing.x);
+            GetComponent<Animator>().SetFloat("X", facing.x);
+            GetComponent<Animator>().SetFloat("Y", facing.y);
+			//rb.rotation = Mathf.Rad2Deg * Mathf.Atan2(facing.y, facing.x);
 		}
 	}
 
